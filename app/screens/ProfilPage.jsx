@@ -19,7 +19,7 @@ let deviceWidth = Dimensions.get('window').width;
 const styles = StyleSheet.create({
   container: {
     marginTop: 40,
-    flex: 1,
+    width: Dimensions.get('window').width,
     marginBottom: 50,
     alignSelf: 'center',
   },
@@ -106,18 +106,15 @@ const styles = StyleSheet.create({
   },
 })
 
-export default function ProfilPage() {
+export default function ProfilPage(props) {
   const [favorite, setFavorite] = React.useState(false);
   const [count, setCount] = React.useState(0);
-  //const [max, setMax] = React.useState('');
 
   return (
     <View>
       <Pressable style={styles.buttonAbsolute}
         onPress={() => {
-          console.log("buttonAbsolute");
           setCount(count + 1);
-          console.log(count);
         }}>
         <Text style={{ color: 'white' }}> Buy & go </Text>
       </Pressable>
@@ -125,9 +122,9 @@ export default function ProfilPage() {
         <KeyboardAvoidingWrapper>
           <View style={styles.container}>
             <View style={styles.presentation}>
-              <Image style={styles.profil} source={require('../assets/fThomas.png')} />
-              <Text style={styles.name}> @f_thomas </Text>
-              <Text style={styles.job}> Manager Fiverr</Text>
+              <Image style={styles.profil} source={{ uri: props[0].photo }} />
+              <Text style={styles.name}> {props[0].name} </Text>
+              <Text style={styles.job}> {props[0].title} </Text>
               <View>
                 <View style={styles.sectionFavorite}>
                   <View>
