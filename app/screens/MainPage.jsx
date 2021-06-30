@@ -1,37 +1,40 @@
-import * as React from 'react';
-import { View, FlatList, Dimensions } from 'react-native';
+import React, { useState, useCallback, useContext } from 'react';
+import { View, FlatList, Dimensions, ScrollView, Text } from 'react-native';
 import VideoItem from './VideoItem';
-
-const DATA = [
-    {
-        id: 'bd7acbea-c1b1-46c2-aed5-3ad53abb28badfzae',
-        uri: "https://docs.expo.io/static/videos/dev-prod/devMode.mp4"
-    },
-    {
-        id: 'bd7acbea-c1b1-46c2-aed5-3ad53abb28bb',
-        uri: "https://docs.expo.io/static/videos/dev-prod/devMode.mp4"
-    },
-    {
-        id: 'bd7acbea-c1b1-46c2-aed5-3ad53abb28bfsqb',
-        uri: "https://docs.expo.io/static/videos/dev-prod/devMode.mp4"
-    },
-    {
-        id: 'bd7acbea-c1b1-46c2-aed5-3ad53abb28bfqsefsqeb',
-        uri: "https://docs.expo.io/static/videos/dev-prod/devMode.mp4"
-    }
-];
+import { AppContext } from '../AppProvider';
 
 export default function MainPage() {
+    const [viewedItems, setViewedItems] = useState(0);
+    const { data, setData } = useContext(AppContext);
+
+    const handleVieweableItemsChanged = useCallback(({ changed }) => {
+        setViewedItems(() => changed[0].index);
+    }, []);
+    const viewConfigRef = React.useRef({ viewAreaCoveragePercentThreshold: 50 })
+
+
     return (
-        <View>
+        <ScrollView
+            horizontal={true}
+            showsHorizontalScrollIndicator={false}
+            snapToInterval={Dimensions.get('window').width}
+            snapToAlignment={"end"}
+            decelerationRate={'fast'}
+        >
             <FlatList
-                data={DATA}
-                renderItem={({ item }) => <VideoItem uri={item.uri} />}
+                data={data}
+                renderItem={({ item }) => <VideoItem uri={item.uri} likes={item.likes} comments={item.comments} star={item.star} name={item.name} photo={item.photo} title={item.title} />}
                 showsVerticalScrollIndicator={false}
                 snapToInterval={Dimensions.get('window').height}
                 keyExtractor={item => item.id}
                 snapToAlignment={'start'}
+                onViewableItemsChanged={handleVieweableItemsChanged}
+                viewabilityConfig={viewConfigRef.current}
                 decelerationRate={'normal'} />
-        </View>
+            <View
+                style={{ height: 300, width: Dimensions.get('window').width, backgroundColor: "red" }}>
+                <Text style={{ color: "#000", alignSelf: 'center', fontSize: 100 }}>{viewedItems}</Text>
+            </View>
+        </ScrollView>
     );
 }
