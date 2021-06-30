@@ -25,7 +25,7 @@ class OtherPeople extends Component {
       <View style={styles.groups}>
         <View style={styles.people}>
           <Image source={this.props.image}
-            style={{ flex: 1, width: 50, height: 50, borderRadius: 50 }} />
+            style={{ width: 50, height: 50, borderRadius: 50 }} />
         </View>
         <View style={{ paddingLeft: 10, paddingTop: 10 }}>
           <Text> {this.props.name}</Text>

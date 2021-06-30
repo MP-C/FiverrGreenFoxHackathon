@@ -21,8 +21,7 @@ const styles = StyleSheet.create({
     marginTop: 40,
     flex: 1,
     marginBottom: 50,
-    marginLeft: 15,
-    alignItems: 'center',
+    alignSelf: 'center',
   },
   intro: {
     backgroundColor: 'white',
@@ -67,6 +66,7 @@ const styles = StyleSheet.create({
   },
   works: {
     justifyContent: 'center',
+    alignSelf: 'center',
     alignItems: 'center',
     marginTop: 25,
   },
@@ -76,9 +76,9 @@ const styles = StyleSheet.create({
     borderRadius: 5,
   },
   work: {
-    width: 130,
+    width: "33%",
     height: 95,
-    borderRadius: 15,
+    borderRadius: 5,
     marginTop: 5,
     marginRight: 5,
   },
@@ -108,16 +108,16 @@ const styles = StyleSheet.create({
 
 export default function ProfilPage() {
   const [favorite, setFavorite] = React.useState(false);
-  let count = 0;
+  const [count, setCount] = React.useState(0);
   //const [max, setMax] = React.useState('');
 
   return (
     <View>
       <Pressable style={styles.buttonAbsolute}
         onPress={() => {
-          console.log("buttonAbsolute")
-          console.log(count)
-          count += 1
+          console.log("buttonAbsolute");
+          setCount(count + 1);
+          console.log(count);
         }}>
         <Text style={{ color: 'white' }}> Buy & go </Text>
       </Pressable>
@@ -136,7 +136,7 @@ export default function ProfilPage() {
                         style={{
                           borderColor: '#003c1a',
                           color: 'rgb(25, 164, 99)',
-                        }}> Add to Favorites  </Text>
+                        }}> Follow  </Text>
                     </Pressable>
                   </View>
                   <View>
@@ -147,18 +147,19 @@ export default function ProfilPage() {
                   </View>
                 </View>
               </View>
-              <ScrollView scrollEventThrottle={10}
-              >
-                {count >= 10
+
+              <View style={{ width: '81%', alignSelf: 'center' }}>
+                {count >= 1
                   ? (<Text style={{
                     fontWeight: '700',
                     paddingHorizontal: 10,
                     color: '#003c1a',
                     marginTop: 30,
+                    textAlign: 'center',
+
                   }}>
-                    I am sorry, at the moment I am required to more projects.
-                    In here you will be able to find other people who will be interest
-                    to help you.
+                    I am sorry, at the moment I am required to more projects. In here you will be able to find other people who will be interest to help you.
+                    {/*Please contact my collegues to discuss your demands*/}
                   </Text>)
                   : (<Text style={{
                     fontWeight: '700',
@@ -169,7 +170,10 @@ export default function ProfilPage() {
                     Following
                   </Text>)
                 }
-                {count >= 10
+              </View>
+              {/*{count >= 11 ? alert('I am sorry, at the moment I am required to more projects. In here you will be able to find other people who will be interest to help you.') : ''} */}
+              <ScrollView scrollEventThrottle={10}>
+                {count >= 1
                   ? (<View style={styles.client}>
                     <ScrollView horizontal={true}
                       showsHorizontalScrollIndicator={false}
@@ -202,22 +206,31 @@ export default function ProfilPage() {
                   </View>)
 
                   : (
-                    <View style={styles.client}>
+                    <View>
                       <ScrollView horizontal={true}
                         showsHorizontalScrollIndicator={false}
                       >
                         <OtherPeople image={require('../assets/fiverr-logo-2.png')}
                           name="Fiverr"
                         />
-                        <OtherPeople source={uri = 'https://media-exp3.licdn.com/dms/image/D4D35AQEJArwbYiLRIg/profile-framedphoto-shrink_800_800/0/1621951744699?e=1625086800&v=beta&t=AgiwM4AGhR9D0RSvN2dcSZmqALItB_PAEMSZeDGxViU'}
+                        <OtherPeople image={{ uri: "https://media-exp3.licdn.com/dms/image/D4D35AQEJArwbYiLRIg/profile-framedphoto-shrink_800_800/0/1621951744699?e=1625086800&v=beta&t=AgiwM4AGhR9D0RSvN2dcSZmqALItB_PAEMSZeDGxViU" }}
                           name="Dumitru"
-                          job="Developper" />
-                        <OtherPeople source={uri = 'https://media-exp3.licdn.com/dms/image/C4E03AQH5K55-8EZYpA/profile-displayphoto-shrink_400_400/0/1622451984217?e=1630540800&v=beta&t=2NHwRdkTOZ_IqM-RbpVn87ucVOz53UY2dq2msTddfng/'}
+                          job="Developper" alt='new' />
+                        <OtherPeople image={{ uri: "https://media-exp3.licdn.com/dms/image/C4E03AQH5K55-8EZYpA/profile-displayphoto-shrink_400_400/0/1622451984217?e=1630540800&v=beta&t=2NHwRdkTOZ_IqM-RbpVn87ucVOz53UY2dq2msTddfng" }}
                           name="Leopold"
-                          job="Front-End" />
-                        <OtherPeople source={uri = 'https://media-exp3.licdn.com/dms/image/D4D35AQHbJl-Q_j0N7g/profile-framedphoto-shrink_400_400/0/1622880928103?e=1625086800&v=beta&t=TKMV-PosdnzRJ616bOqcVdIe2aEGGUMAdE-eiMqzo1M'}
+                          job="Front-End" alt='new' />
+                        <OtherPeople image={{ uri: "https://media-exp3.licdn.com/dms/image/D4D35AQHbJl-Q_j0N7g/profile-framedphoto-shrink_400_400/0/1622880928103?e=1625086800&v=beta&t=TKMV-PosdnzRJ616bOqcVdIe2aEGGUMAdE-eiMqzo1M" }}
                           name="Mário"
-                          job="Developper" />
+                          job="Developper" alt='new' />
+                        <OtherPeople image={{ uri: "https://media-exp3.licdn.com/dms/image/D4D35AQEJArwbYiLRIg/profile-framedphoto-shrink_800_800/0/1621951744699?e=1625086800&v=beta&t=AgiwM4AGhR9D0RSvN2dcSZmqALItB_PAEMSZeDGxViU" }}
+                          name="Dumitru"
+                          job="Developper" alt='new' />
+                        <OtherPeople image={{ uri: "https://media-exp3.licdn.com/dms/image/C4E03AQH5K55-8EZYpA/profile-displayphoto-shrink_400_400/0/1622451984217?e=1630540800&v=beta&t=2NHwRdkTOZ_IqM-RbpVn87ucVOz53UY2dq2msTddfng" }}
+                          name="Leopold"
+                          job="Front-End" alt='new' />
+                        <OtherPeople image={{ uri: "https://media-exp3.licdn.com/dms/image/D4D35AQHbJl-Q_j0N7g/profile-framedphoto-shrink_400_400/0/1622880928103?e=1625086800&v=beta&t=TKMV-PosdnzRJ616bOqcVdIe2aEGGUMAdE-eiMqzo1M" }}
+                          name="Mário"
+                          job="Developper" alt='new' />
                       </ScrollView>
                     </View>)
                 }
