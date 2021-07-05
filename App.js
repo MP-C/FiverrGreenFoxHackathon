@@ -1,5 +1,6 @@
 import { StatusBar } from 'expo-status-bar';
 import React from 'react';
+<<<<<<< HEAD
 import { StyleSheet, Text, View } from 'react-native';
 
 import MainPage from './app/screens/MainPage';
@@ -12,6 +13,10 @@ export default function App() {
     </View>
   );
 }
+=======
+import ProfilPage from './app/screens/ProfilPage';
+import { StyleSheet, View } from 'react-native';
+>>>>>>> videoPage
 
 const styles = StyleSheet.create({
   container: {
@@ -22,3 +27,13 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
 });
+
+
+export default function App() {
+  return (
+    <View style={styles.container}>
+      <StatusBar style="auto" />
+      <ProfilPage />
+    </View>
+  );
+}

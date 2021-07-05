@@ -16,8 +16,14 @@
     "expo-status-bar": "~1.0.4",
     "react": "16.13.1",
     "react-dom": "16.13.1",
+    "react-instagram-carousel": "^2.0.1",
     "react-native": "https://github.com/expo/react-native/archive/sdk-41.0.0.tar.gz",
+<<<<<<< HEAD
     "react-native-svg": "12.1.0",
+=======
+    "react-native-imaged-carousel-card": "^0.1.1",
+    "react-native-svg": "^12.1.1",
+>>>>>>> videoPage
     "react-native-web": "~0.13.12"
   },
   "devDependencies": {
